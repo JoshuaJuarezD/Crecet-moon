@@ -130,7 +130,7 @@ public class IO {
     }
 
     public ArrayList<Producto> lecturaProducto() {
-        ArrayList <Producto> lista;
+        ArrayList<Producto> lista = new ArrayList();
         File archivoPrincipal = null;
         FileReader frPrincipal = null;
         BufferedReader brPrincipal = null;
@@ -138,32 +138,33 @@ public class IO {
             archivoPrincipal = new File("C:/Cresent moon/productos/Principal.txt");
             frPrincipal = new FileReader(archivoPrincipal);
             brPrincipal = new BufferedReader(frPrincipal);
-            int num=Integer.parseInt(brPrincipal.readLine());
-            for(int c=0;c<num;c++){
-                String nombreArchivo=brPrincipal.readLine();
-                File archivo= new File("C:/Cresent moon/productos/"+nombreArchivo);
-                FileReader fr=new FileReader(archivo);
+            int num = Integer.parseInt(brPrincipal.readLine());
+            for (int c = 0; c < num; c++) {
+                String nombreArchivo = brPrincipal.readLine();
+                File archivo = new File("C:/Cresent moon/productos/" + nombreArchivo);
+                FileReader fr = new FileReader(archivo);
                 BufferedReader br = new BufferedReader(fr);
-                String id= br.readLine();
-                String nombre=br.readLine();
+                String id = br.readLine();
+                String nombre = br.readLine();
                 String descripcion = br.readLine();
                 String[] idprove = br.readLine().split(", ");
-                ArrayList <String> idProveedor = null;
+                ArrayList<String> idProveedor = null;
                 idProveedor.addAll(Arrays.asList(idprove));
                 String[] cos = br.readLine().split(", ");
-                ArrayList <Integer> costo = null;
-                for(int d=0 ; d<cos.length ; d++ )
+                ArrayList<Integer> costo = null;
+                for (int d = 0; d < cos.length; d++) {
                     costo.add(Integer.parseInt(cos[c]));
+                }
                 String[] tag = br.readLine().split(", ");
-                ArrayList <String> idtag = null;
+                ArrayList<String> idtag = null;
                 idtag.addAll(Arrays.asList(tag));
-                Producto producto=new Producto(id, nombre, descripcion, idProveedor, costo, idtag);
+                Producto producto = new Producto(id, nombre, descripcion, idProveedor, costo, idtag);
+                lista.add(producto);
             }
-            
+            return lista;
         } catch (IOException ex) {
             Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
-        return null;
+        return lista;
     }
 }
