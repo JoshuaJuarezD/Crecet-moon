@@ -8,10 +8,10 @@ public class Producto {
     private String Nombre;
     private String descripcion;
     private ArrayList <String> IDProovedor;
-    private ArrayList <Integer> costo;
+    private ArrayList <Double> costo;
     private ArrayList <String> IDtag;
 
-    public Producto(String ID, String Nombre, String descripcion, ArrayList<String> IDProovedor, ArrayList<Integer> costo, ArrayList<String> IDtag) {
+    public Producto(String ID, String Nombre, String descripcion, ArrayList<String> IDProovedor, ArrayList<Double> costo, ArrayList<String> IDtag) {
         this.ID = ID;
         this.Nombre = Nombre;
         this.descripcion = descripcion;
@@ -52,11 +52,11 @@ public class Producto {
         this.IDProovedor = IDProovedor;
     }
 
-    public ArrayList<Integer> getCosto() {
+    public ArrayList<Double> getCosto() {
         return costo;
     }
 
-    public void setCosto(ArrayList<Integer> costo) {
+    public void setCosto(ArrayList<Double> costo) {
         this.costo = costo;
     }
 
@@ -67,6 +67,38 @@ public class Producto {
     public void setIDtag(ArrayList<String> IDtag) {
         this.IDtag = IDtag;
     }
+
+    @Override
+    public String toString() {
+        return ID + "\n" + Nombre + "\n" + descripcion + "\n" + formatString(IDProovedor) + "\n" + formatint(costo) + "\n" + formatString(IDtag);
+    }
     
+    public String formatString(ArrayList<String> cadena){
+        String retorno = new String();
+        if(cadena.size()>0)
+            retorno=retorno+"1\n";
+        else
+            retorno=retorno+"0\n";
+        for(int c=0;c<cadena.size();c++){
+            retorno=retorno+cadena.get(c);
+            if(c!=cadena.size()-1)
+                retorno=retorno+",";
+        }
+        return retorno;
+    }
+    
+    public String formatint(ArrayList<Double> cadena){
+        String retorno = new String();
+        if(cadena.size()>0)
+            retorno=retorno+"1\n";
+        else
+            retorno=retorno+"0\n";
+        for(int c=0;c<cadena.size();c++){
+            retorno=retorno+cadena.get(c);
+            if(c!=cadena.size()-1)
+                retorno=retorno+",";
+        }
+        return retorno;
+    }
 }
 

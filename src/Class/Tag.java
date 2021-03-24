@@ -10,6 +10,7 @@ public class Tag {
         this.Nombre = Nombre;
     }
 
+
     public String getID() {
         return ID;
     }
@@ -25,6 +26,5 @@ public class Tag {
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
-
 
 }

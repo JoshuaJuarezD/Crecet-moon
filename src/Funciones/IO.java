@@ -9,8 +9,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Array;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -43,11 +41,7 @@ public class IO {
                 pwPrincial.println(lista.get(c).getID());
                 fichero = new FileWriter("C:/Cresent moon/productos/" + lista.get(c).getID() + ".txt");
                 pw = new PrintWriter(fichero);
-                pw.println(lista.get(c).getNombre());
-                pw.println(lista.get(c).getDescripcion());
-                pw.println(lista.get(c).getIDProovedor().toString());
-                pw.println(lista.get(c).getCosto().toString());
-                pw.println(lista.get(c).getIDtag().toString());
+                pw.println(lista.get(c).toString());
                 if (null != fichero) {
                     fichero.close();
                 }
@@ -102,7 +96,7 @@ public class IO {
         FileWriter ficheroPrincipal = null;
         PrintWriter pwPrincial = null;
         try {
-            ficheroPrincipal = new FileWriter("C:/Cresent moon/proovedor/Principal.txt");
+            ficheroPrincipal = new FileWriter("C:/Cresent moon/tag/Principal.txt");
             pwPrincial = new PrintWriter(ficheroPrincipal);
             pwPrincial.println(lista.size());
             FileWriter fichero = null;
@@ -139,31 +133,117 @@ public class IO {
             frPrincipal = new FileReader(archivoPrincipal);
             brPrincipal = new BufferedReader(frPrincipal);
             int num = Integer.parseInt(brPrincipal.readLine());
+            String isLinea = new String();
             for (int c = 0; c < num; c++) {
                 String nombreArchivo = brPrincipal.readLine();
-                File archivo = new File("C:/Cresent moon/productos/" + nombreArchivo);
+                File archivo = new File("C:/Cresent moon/productos/" + nombreArchivo + ".txt");
                 FileReader fr = new FileReader(archivo);
                 BufferedReader br = new BufferedReader(fr);
                 String id = br.readLine();
                 String nombre = br.readLine();
                 String descripcion = br.readLine();
-                String[] idprove = br.readLine().split(", ");
-                ArrayList<String> idProveedor = null;
-                idProveedor.addAll(Arrays.asList(idprove));
-                String[] cos = br.readLine().split(", ");
-                ArrayList<Integer> costo = null;
-                for (int d = 0; d < cos.length; d++) {
-                    costo.add(Integer.parseInt(cos[c]));
+                isLinea = br.readLine();
+                ArrayList<String> idtag = new ArrayList();
+                ArrayList<Double> costo = new ArrayList();
+                ArrayList<String> idProveedor = new ArrayList();
+                if (isLinea.equals("1")) {
+                    String[] idprove = br.readLine().split(",");
+                    idProveedor.addAll(Arrays.asList(idprove));
                 }
-                String[] tag = br.readLine().split(", ");
-                ArrayList<String> idtag = null;
-                idtag.addAll(Arrays.asList(tag));
+                isLinea = br.readLine();
+                if (isLinea.equals("1")) {
+                    String[] cos = br.readLine().split(",");
+                    for (int d = 0; d < cos.length; d++) {
+                        costo.add(Double.parseDouble(cos[c]));
+                    }
+                }
+                isLinea = br.readLine();
+                if (isLinea.equals("1")) {
+                    String[] tag = br.readLine().split(",");
+                    idtag.addAll(Arrays.asList(tag));
+                }
                 Producto producto = new Producto(id, nombre, descripcion, idProveedor, costo, idtag);
                 lista.add(producto);
             }
             return lista;
         } catch (IOException ex) {
             Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (null != frPrincipal) {
+                    frPrincipal.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+
+    public ArrayList<Proovedor> lecturaProovedor() {
+        ArrayList<Proovedor> lista = new ArrayList();
+        File archivoPrincipal = null;
+        FileReader frPrincipal = null;
+        BufferedReader brPrincipal = null;
+        try {
+            archivoPrincipal = new File("C:/Cresent moon/proovedor/Principal.txt");
+            frPrincipal = new FileReader(archivoPrincipal);
+            brPrincipal = new BufferedReader(frPrincipal);
+            int num = Integer.parseInt(brPrincipal.readLine());
+            for (int c = 0; c < num; c++) {
+                String nombreArchivo = brPrincipal.readLine();
+                File archivo = new File("C:/Cresent moon/proovedor/" + nombreArchivo + ".txt");
+                FileReader fr = new FileReader(archivo);
+                BufferedReader br = new BufferedReader(fr);
+                String nombre = br.readLine();
+                Proovedor proovedor = new Proovedor(nombreArchivo, nombre);
+                lista.add(proovedor);
+            }
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (null != frPrincipal) {
+                    frPrincipal.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+    }
+
+    public ArrayList<Tag> lecturaTags() {
+        ArrayList<Tag> lista = new ArrayList();
+        File archivoPrincipal = null;
+        FileReader frPrincipal = null;
+        BufferedReader brPrincipal = null;
+        try {
+            archivoPrincipal = new File("C:/Cresent moon/tag/Principal.txt");
+            frPrincipal = new FileReader(archivoPrincipal);
+            brPrincipal = new BufferedReader(frPrincipal);
+            int num = Integer.parseInt(brPrincipal.readLine());
+            for (int c = 0; c < num; c++) {
+                String nombreArchivo = brPrincipal.readLine();
+                File archivo = new File("C:/Cresent moon/tag/" + nombreArchivo + ".txt");
+                FileReader fr = new FileReader(archivo);
+                BufferedReader br = new BufferedReader(fr);
+                String nombre = br.readLine();
+                Tag tag = new Tag(nombreArchivo, nombre);
+                lista.add(tag);
+            }
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (null != frPrincipal) {
+                    frPrincipal.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return lista;
     }
