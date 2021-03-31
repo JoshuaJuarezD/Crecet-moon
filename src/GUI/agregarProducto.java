@@ -6,10 +6,10 @@ import Class.Tag;
 import Funciones.IO;
 import java.awt.Component;
 import java.util.ArrayList;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.tree.ExpandVetoException;
 
 public class agregarProducto extends javax.swing.JFrame {
 
@@ -18,23 +18,31 @@ public class agregarProducto extends javax.swing.JFrame {
     IO io = new IO();
     ArrayList<Tag> tagGuardados = io.lecturaTags();
     ArrayList<Proovedor> proovedores = io.lecturaProovedor();
-    ArrayList<Producto> producto=io.lecturaProducto();
+    ArrayList<Producto> producto = io.lecturaProducto();
 
     public agregarProducto() {
         initComponents();
     }
 
     public void iniciar() {
-        jComboBox1.addItem("Sin seleccionar");
+
+        jComboBox1.addItem("sin seleccionar");
         for (int c = 0; c < proovedores.size(); c++) {
             jComboBox1.addItem(proovedores.get(c).getNombre());
         }
         jCheckBox1.setSelected(true);
         jCheckBox2.setSelected(true);
+        model = new DefaultTableModel();
+        model2 = new DefaultTableModel();
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 1120, 530);
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 1120, 511);
         this.setVisible(true);
+        jTextArea1.setText("");
+        jTextField1.setText("");
+        jTextField2.setText("");
+        jTextField3.setText("");
+        jComboBox1.setSelectedIndex(0);
         iniciarTablas();
     }
 
@@ -50,11 +58,12 @@ public class agregarProducto extends javax.swing.JFrame {
         jTable2.setModel(model);
         model2.addColumn("ID");
         model2.addColumn("Nombre");
-        jTable3.setModel(model2);       
+        jTable3.setModel(model2);
         jTable3.getColumnModel().getColumn(0).setPreferredWidth(30);
         jTable3.getColumnModel().getColumn(1).setPreferredWidth(150);
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
         jTable2.getColumnModel().getColumn(1).setPreferredWidth(150);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -181,6 +190,11 @@ public class agregarProducto extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText("Regresar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 20, 142, 43));
 
         jTable2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -270,10 +284,10 @@ public class agregarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(jTextField1.getText().isEmpty()||jTextField2.getText().isEmpty()||jTextArea1.getText().isEmpty()){
+        if (jTextField1.getText().isEmpty() || jTextField2.getText().isEmpty() || jTextArea1.getText().isEmpty()) {
             JOptionPane.showMessageDialog(new JFrame(), "Uno o mas campos vacios", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }      
+        }
         String ID = jTextField1.getText();
         String nombre = jTextField2.getText();
         String Descripcion = jTextArea1.getText().replace("\n", ", ");
@@ -281,7 +295,7 @@ public class agregarProducto extends javax.swing.JFrame {
         ArrayList<Double> costo = new ArrayList();
         ArrayList<String> tags = new ArrayList();
         if (jCheckBox1.isSelected()) {
-           
+
             if (jComboBox1.getSelectedIndex() != 0) {
                 Idproovedor.add(proovedores.get(jComboBox1.getSelectedIndex() - 1).getID());
             } else {
@@ -293,33 +307,36 @@ public class agregarProducto extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(new JFrame(), "Costo no valido", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-        if(jCheckBox2.isSelected()){
-            int filas[] =jTable3.getSelectedRows();
-            if(filas.length==0){
-               JOptionPane.showMessageDialog(new JFrame(), "No se agregaron etiquetas", "Error", JOptionPane.ERROR_MESSAGE); 
-               return;
+        if (jCheckBox2.isSelected()) {
+            int filas = jTable3.getRowCount();
+            if (filas == 0) {
+                JOptionPane.showMessageDialog(new JFrame(), "No se agregaron etiquetas", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-            for(int c=0;c<filas.length;c++){
-                tags.add(model2.getValueAt(filas[c], 0).toString());
+            for (int c = 0; c < filas; c++) {
+                tags.add(model2.getValueAt(c, 0).toString());
             }
         }
-        Producto nuevoProducto=new Producto(ID, nombre, Descripcion, Idproovedor, costo, tags);
-        if(validaProducto(nuevoProducto)){
+        Producto nuevoProducto = new Producto(ID, nombre, Descripcion, Idproovedor, costo, tags);
+        if (validaProducto(nuevoProducto)) {
             JOptionPane.showMessageDialog(new JFrame(), "Producto existente ", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         producto.add(nuevoProducto);
         io.escrituraProducto(producto);
         JOptionPane.showMessageDialog(new JFrame(), "Producto agregado correctamente");
+        iniciar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public boolean validaProducto(Producto productoNuevo){
-        for(int c=0;c<producto.size();c++)
-            if(productoNuevo.getID().equals(producto.get(c).getID()))
+    public boolean validaProducto(Producto productoNuevo) {
+        for (int c = 0; c < producto.size(); c++) {
+            if (productoNuevo.getID().equals(producto.get(c).getID())) {
                 return true;
+            }
+        }
         return false;
     }
-    
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int filas[] = jTable3.getSelectedRows();
         for (int c = 0; c < filas.length; c++) {
@@ -343,6 +360,12 @@ public class agregarProducto extends javax.swing.JFrame {
         jTable2.setModel(model);
         jTable3.setModel(model2);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        ventanaPrincipal ventana=new ventanaPrincipal();
+        this.setVisible(false);
+        ventana.iniciar();
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

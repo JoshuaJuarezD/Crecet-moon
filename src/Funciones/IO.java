@@ -149,14 +149,16 @@ public class IO {
                 if (isLinea.equals("1")) {
                     String[] idprove = br.readLine().split(",");
                     idProveedor.addAll(Arrays.asList(idprove));
-                }
+                }else
+                    br.readLine();
                 isLinea = br.readLine();
                 if (isLinea.equals("1")) {
                     String[] cos = br.readLine().split(",");
                     for (int d = 0; d < cos.length; d++) {
-                        costo.add(Double.parseDouble(cos[c]));
+                        costo.add(Double.parseDouble(cos[d]));
                     }
-                }
+                }else
+                    br.readLine();
                 isLinea = br.readLine();
                 if (isLinea.equals("1")) {
                     String[] tag = br.readLine().split(",");
