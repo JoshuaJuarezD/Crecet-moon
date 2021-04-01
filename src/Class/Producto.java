@@ -7,6 +7,7 @@ public class Producto {
     private String ID;
     private String Nombre;
     private String descripcion;
+    private Integer cantidadBodega=0;
     private ArrayList <String> IDProovedor;
     private ArrayList <Double> costo;
     private ArrayList <String> IDtag;
@@ -68,9 +69,18 @@ public class Producto {
         this.IDtag = IDtag;
     }
 
+    public Integer getCantidadBodega() {
+        return cantidadBodega;
+    }
+
+    public void setCantidadBodega(Integer cantidadBodega) {
+        this.cantidadBodega = cantidadBodega;
+    }
+
+    
     @Override
     public String toString() {
-        return ID + "\n" + Nombre + "\n" + descripcion + "\n" + formatString(IDProovedor) + "\n" + formatint(costo) + "\n" + formatString(IDtag);
+        return ID + "\n" + Nombre + "\n" + descripcion +"\n" +cantidadBodega + "\n" + formatString(IDProovedor) + "\n" + formatint(costo) + "\n" + formatString(IDtag);
     }
     
     public String formatString(ArrayList<String> cadena){

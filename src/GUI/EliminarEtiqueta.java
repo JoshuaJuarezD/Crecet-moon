@@ -70,6 +70,7 @@ public class EliminarEtiqueta extends javax.swing.JFrame {
         });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 10, 120, 40));
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Eliminar etiqueta");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +123,6 @@ public class EliminarEtiqueta extends javax.swing.JFrame {
         for(int c=0;c<producto.size();c++){
             ArrayList<String> etiquetas=producto.get(c).getIDtag();
             for(int d=0;d<etiquetas.size();d++){
-                System.out.println(etiquetas.get(d));
                 if(etiquetas.get(d).equals(tag.getID()))
                     etiquetas.remove(d);
             }

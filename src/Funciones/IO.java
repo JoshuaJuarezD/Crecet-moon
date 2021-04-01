@@ -27,8 +27,25 @@ public class IO {
         }
     }
 
+    public void CrearArchivo(String ruta) {
+        File archivo = new File(ruta);
+        FileWriter fw=null;
+        PrintWriter pw=null;
+        if (!archivo.exists())
+            try {
+            archivo.createNewFile();
+            fw=new FileWriter(archivo);
+            pw=new PrintWriter(fw);
+            pw.print("0");
+            pw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+
     public void escrituraProducto(ArrayList<Producto> lista) {
-        Creardirectrorio("C:/Cresent moon/productos");
+
         FileWriter ficheroPrincipal = null;
         PrintWriter pwPrincial = null;
         try {
@@ -60,7 +77,7 @@ public class IO {
     }
 
     public void escrituraProovedor(ArrayList<Proovedor> lista) {
-        Creardirectrorio("C:/Cresent moon/proovedor");
+
         FileWriter ficheroPrincipal = null;
         PrintWriter pwPrincial = null;
         try {
@@ -92,7 +109,7 @@ public class IO {
     }
 
     public void escrituraTags(ArrayList<Tag> lista) {
-        Creardirectrorio("C:/Cresent moon/tag");
+
         FileWriter ficheroPrincipal = null;
         PrintWriter pwPrincial = null;
         try {
@@ -142,29 +159,34 @@ public class IO {
                 String id = br.readLine();
                 String nombre = br.readLine();
                 String descripcion = br.readLine();
+                Integer cantidadBodega = Integer.parseInt(br.readLine());
                 isLinea = br.readLine();
+                
                 ArrayList<String> idtag = new ArrayList();
                 ArrayList<Double> costo = new ArrayList();
                 ArrayList<String> idProveedor = new ArrayList();
                 if (isLinea.equals("1")) {
                     String[] idprove = br.readLine().split(",");
                     idProveedor.addAll(Arrays.asList(idprove));
-                }else
+                } else {
                     br.readLine();
+                }
                 isLinea = br.readLine();
                 if (isLinea.equals("1")) {
                     String[] cos = br.readLine().split(",");
                     for (int d = 0; d < cos.length; d++) {
                         costo.add(Double.parseDouble(cos[d]));
                     }
-                }else
+                } else {
                     br.readLine();
+                }
                 isLinea = br.readLine();
                 if (isLinea.equals("1")) {
                     String[] tag = br.readLine().split(",");
                     idtag.addAll(Arrays.asList(tag));
                 }
                 Producto producto = new Producto(id, nombre, descripcion, idProveedor, costo, idtag);
+                producto.setCantidadBodega(cantidadBodega);
                 lista.add(producto);
             }
             return lista;

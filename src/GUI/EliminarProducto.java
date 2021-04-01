@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class EliminarProducto extends javax.swing.JFrame {
-
+    DefaultTableModel model = new DefaultTableModel();
     IO io = new IO();
     ArrayList<Producto> productosExistentes = io.lecturaProducto();
 
@@ -21,7 +21,7 @@ public class EliminarProducto extends javax.swing.JFrame {
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
         this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 842, 613);
-        DefaultTableModel model = new DefaultTableModel();
+        
         model.addColumn("ID");
         model.addColumn("Nombre");
         model.addColumn("Descripcion");
@@ -34,7 +34,7 @@ public class EliminarProducto extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
         this.setVisible(true);
     }
 
@@ -141,16 +141,18 @@ public class EliminarProducto extends javax.swing.JFrame {
         model2.addColumn("ID");
         model2.addColumn("Nombre");
         model2.addColumn("Descripcion");
+        model2.addColumn("Etiquetas");
         ArrayList<Producto> productoBuscado = new ArrayList();
-        for (int c = 0; c < productosExistentes.size(); c++) {
-            if (productosExistentes.get(c).getNombre().toLowerCase().contains(Busqueda) || productosExistentes.get(c).getID().toLowerCase().contains(Busqueda)) {
-                model2.addRow(new Object[]{productosExistentes.get(c).getID(), productosExistentes.get(c).getNombre(), productosExistentes.get(c).getDescripcion()});
+        for (int c = 0; c < model.getRowCount(); c++) {
+            if (model.getValueAt(c, 0).toString().toLowerCase().contains(Busqueda)||model.getValueAt(c, 1).toString().toLowerCase().contains(Busqueda)||model.getValueAt(c, 3).toString().toLowerCase().contains(Busqueda)) {
+                model2.addRow(new Object[]{model.getValueAt(c, 0),model.getValueAt(c, 1),model.getValueAt(c, 2),model.getValueAt(c, 3) });
             }
         }
         jTable1.setModel(model2);
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(150);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(250);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(60);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
