@@ -1,14 +1,13 @@
 package Funciones;
 import GUI.CrearNuevoProducto;
-import GUI.ventanaPrincipal;
 
 
 public class Main {
     static IO io=new IO();
     public static void main(String[] args) {       
         inicialisarDirectorio();
-        ventanaPrincipal ventana=new ventanaPrincipal();
-        ventana.iniciar();
+        CrearNuevoProducto ventana= new CrearNuevoProducto();
+        ventana.setVisible(true);
     }
 
     public static void inicialisarDirectorio() {
@@ -16,9 +15,11 @@ public class Main {
        io.Creardirectrorio("C:/Cresent moon/productos");
        io.Creardirectrorio("C:/Cresent moon/proovedor");
        io.Creardirectrorio("C:/Cresent moon/tag");
+       io.Creardirectrorio("C:/Cresent moon/reporte");
        io.CrearArchivo("C:/Cresent moon/productos/Principal.txt");
        io.CrearArchivo("C:/Cresent moon/proovedor/Principal.txt");
        io.CrearArchivo("C:/Cresent moon/tag/Principal.txt");
+       io.CrearArchivo("C:/Cresent moon/reporte/Principal.txt");
     }
     
     

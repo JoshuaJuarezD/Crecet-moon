@@ -112,9 +112,7 @@ public class EliminarProveedor extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ventanaPrincipal ventana=new ventanaPrincipal();
-        this.setVisible(false);
-        ventana.iniciar();
+    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -131,7 +129,7 @@ public class EliminarProveedor extends javax.swing.JFrame {
         }
         int A = JOptionPane.showConfirmDialog(new JFrame(), "seguro que desa eliminar el Proveedor" + proveedorExitente.get(lugar).getNombre());
         if (A == JOptionPane.YES_OPTION) {
-            eliminarProProducto(proveedorExitente.get(lugar));
+           /// eliminarProProducto(proveedorExitente.get(lugar));
             proveedorExitente.remove(lugar);
             io.escrituraProovedor(proveedorExitente);
             JOptionPane.showMessageDialog(new JFrame(), "Proveedor eliminado correctamente");
@@ -148,11 +146,11 @@ public class EliminarProveedor extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    private void eliminarProProducto(Proovedor proveedor) {
+    /*private void eliminarProProducto(Proovedor proveedor) {
         producto=io.lecturaProducto();
         for(int c=0;c<producto.size();c++){
             ArrayList <Double> costo=producto.get(c).getCosto();
-            ArrayList <String> proveedores=producto.get(c).getIDProovedor();
+           ArrayList <String> proveedores=producto.get(c).getIDProovedor();
             for(int d=0;d<proveedores.size();d++){
                 if(proveedores.get(d).equals(proveedor.getID())){
                     proveedores.remove(d);
@@ -160,8 +158,8 @@ public class EliminarProveedor extends javax.swing.JFrame {
                 }
             }
             producto.get(c).setIDtag(proveedores);
-            producto.get(c).setCosto(costo);
+           producto.get(c).setCosto(costo);
         }
         io.escrituraProducto(producto);
-    }
+    }*/
 }
