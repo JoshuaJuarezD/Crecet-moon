@@ -2,28 +2,24 @@ package Funciones;
 import Class.Producto;
 import Class.Proovedor;
 import Class.Tag;
-import GUI.agregarProducto;
+import GUI.PaginaPrincipal;
 import java.util.ArrayList;
 
 
 public class Main {
 
     public static void main(String[] args) {
-        IO io=new IO();
-        ArrayList <Tag> tags=new ArrayList();
-        Tag aux=new Tag("fhj12", "computo");
-        tags.add(aux);
-        aux=new Tag("fhj122", "2computo");
-        tags.add(aux);
-        aux=new Tag("fh12j12", "4computo");
-        tags.add(aux);
-        io.escrituraTags(tags);
-        tags=io.lecturaTags();
-        agregarProducto ventan=new agregarProducto();
-  
-        ArrayList<Proovedor> proovedores=io.lecturaProovedor();
-        ventan.iniciar();
-        //ArrayList <Tag> liisss= venatan1.iniciar();
+           IO io=new IO();
+           io.Creardirectrorio("C:/Cresent moon/productos");
+           io.Creardirectrorio("C:/Cresent moon/proovedor");
+           io.Creardirectrorio("C:/Cresent moon/tag");
+           io.Creardirectrorio("C:/Cresent moon/reporte");
+           io.CrearArchivo("C:/Cresent moon/productos/Principal.txt");
+           io.CrearArchivo("C:/Cresent moon/proovedor/Principal.txt");
+           io.CrearArchivo("C:/Cresent moon/tag/Principal.txt");
+           io.CrearArchivo("C:/Cresent moon/reporte/Principal.txt");
+           PaginaPrincipal ventana= new PaginaPrincipal();
+           ventana.setVisible(true);
     }
     
 }

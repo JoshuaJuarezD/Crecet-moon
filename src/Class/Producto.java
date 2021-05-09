@@ -7,17 +7,35 @@ public class Producto {
     private String ID;
     private String Nombre;
     private String descripcion;
-    private ArrayList <String> IDProovedor;
-    private ArrayList <Double> costo;
     private ArrayList <String> IDtag;
+    private int cantidadBodega;
+    private boolean activo;
 
-    public Producto(String ID, String Nombre, String descripcion, ArrayList<String> IDProovedor, ArrayList<Double> costo, ArrayList<String> IDtag) {
+    public Producto(String ID, String Nombre, String descripcion, ArrayList<String> IDtag, int cantidadBodega, boolean activo) {
         this.ID = ID;
         this.Nombre = Nombre;
         this.descripcion = descripcion;
-        this.IDProovedor = IDProovedor;
-        this.costo = costo;
         this.IDtag = IDtag;
+        this.cantidadBodega = cantidadBodega;
+        this.activo = activo;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
+
+ 
+
+    public int getCantidadBodega() {
+        return cantidadBodega;
+    }
+
+    public void setCantidadBodega(int cantidadBodega) {
+        this.cantidadBodega = cantidadBodega;
     }
 
     public String getID() {
@@ -43,23 +61,7 @@ public class Producto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public ArrayList<String> getIDProovedor() {
-        return IDProovedor;
-    }
-
-    public void setIDProovedor(ArrayList<String> IDProovedor) {
-        this.IDProovedor = IDProovedor;
-    }
-
-    public ArrayList<Double> getCosto() {
-        return costo;
-    }
-
-    public void setCosto(ArrayList<Double> costo) {
-        this.costo = costo;
-    }
-
+    
     public ArrayList<String> getIDtag() {
         return IDtag;
     }
@@ -70,7 +72,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return ID + "\n" + Nombre + "\n" + descripcion + "\n" + formatString(IDProovedor) + "\n" + formatint(costo) + "\n" + formatString(IDtag);
+        return ID + "\n" + Nombre + "\n" + descripcion +"\n"+ cantidadBodega+"\n"+activo + "\n" + formatString(IDtag);
     }
     
     public String formatString(ArrayList<String> cadena){

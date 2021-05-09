@@ -2,6 +2,7 @@ package Funciones;
 
 import Class.Producto;
 import Class.Proovedor;
+import Class.Reporte;
 import Class.Tag;
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,8 +29,25 @@ public class IO {
         }
     }
 
+    public void CrearArchivo(String ruta) {
+        File archivo = new File(ruta);
+        FileWriter fw = null;
+        PrintWriter pw = null;
+        if (!archivo.exists())
+            try {
+            archivo.createNewFile();
+            fw = new FileWriter(archivo);
+            pw = new PrintWriter(fw);
+            pw.print("0");
+            pw.close();
+        } catch (IOException ex) {
+            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public void escrituraProducto(ArrayList<Producto> lista) {
-        Creardirectrorio("C:/Cresent moon/productos");
+
         FileWriter ficheroPrincipal = null;
         PrintWriter pwPrincial = null;
         try {
@@ -60,7 +79,7 @@ public class IO {
     }
 
     public void escrituraProovedor(ArrayList<Proovedor> lista) {
-        Creardirectrorio("C:/Cresent moon/proovedor");
+
         FileWriter ficheroPrincipal = null;
         PrintWriter pwPrincial = null;
         try {
@@ -74,6 +93,7 @@ public class IO {
                 fichero = new FileWriter("C:/Cresent moon/proovedor/" + lista.get(c).getID() + ".txt");
                 pw = new PrintWriter(fichero);
                 pw.println(lista.get(c).getNombre());
+                pw.println(lista.get(c).isActive());
                 if (null != fichero) {
                     fichero.close();
                 }
@@ -92,7 +112,7 @@ public class IO {
     }
 
     public void escrituraTags(ArrayList<Tag> lista) {
-        Creardirectrorio("C:/Cresent moon/tag");
+
         FileWriter ficheroPrincipal = null;
         PrintWriter pwPrincial = null;
         try {
@@ -106,6 +126,38 @@ public class IO {
                 fichero = new FileWriter("C:/Cresent moon/tag/" + lista.get(c).getID() + ".txt");
                 pw = new PrintWriter(fichero);
                 pw.println(lista.get(c).getNombre());
+                pw.println(lista.get(c).isActivo());
+                if (null != fichero) {
+                    fichero.close();
+                }
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (null != ficheroPrincipal) {
+                    ficheroPrincipal.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    public void escrituraReporte(ArrayList<Reporte> lista) {
+        FileWriter ficheroPrincipal = null;
+        PrintWriter pwPrincial = null;
+        try {
+            ficheroPrincipal = new FileWriter("C:/Cresent moon/reporte/Principal.txt");
+            pwPrincial = new PrintWriter(ficheroPrincipal);
+            pwPrincial.println(lista.size());
+            FileWriter fichero = null;
+            PrintWriter pw = null;
+            for (int c = 0; c < lista.size(); c++) {
+                pwPrincial.println(lista.get(c).getID());
+                fichero = new FileWriter("C:/Cresent moon/reporte/" + lista.get(c).getID() + ".txt");
+                pw = new PrintWriter(fichero);
+                pw.println(lista.get(c).toString());
                 if (null != fichero) {
                     fichero.close();
                 }
@@ -142,27 +194,20 @@ public class IO {
                 String id = br.readLine();
                 String nombre = br.readLine();
                 String descripcion = br.readLine();
+                Integer cantidadBodega = Integer.parseInt(br.readLine());
+                String Activacion = br.readLine();
+                boolean activado = false;
+                if (Activacion.equals("true")) {
+                    activado = true;
+                }
                 isLinea = br.readLine();
                 ArrayList<String> idtag = new ArrayList();
-                ArrayList<Double> costo = new ArrayList();
-                ArrayList<String> idProveedor = new ArrayList();
-                if (isLinea.equals("1")) {
-                    String[] idprove = br.readLine().split(",");
-                    idProveedor.addAll(Arrays.asList(idprove));
-                }
-                isLinea = br.readLine();
-                if (isLinea.equals("1")) {
-                    String[] cos = br.readLine().split(",");
-                    for (int d = 0; d < cos.length; d++) {
-                        costo.add(Double.parseDouble(cos[c]));
-                    }
-                }
-                isLinea = br.readLine();
                 if (isLinea.equals("1")) {
                     String[] tag = br.readLine().split(",");
                     idtag.addAll(Arrays.asList(tag));
                 }
-                Producto producto = new Producto(id, nombre, descripcion, idProveedor, costo, idtag);
+                Producto producto = new Producto(id, nombre, descripcion, idtag, cantidadBodega, activado);
+                producto.setCantidadBodega(cantidadBodega);
                 lista.add(producto);
             }
             return lista;
@@ -196,7 +241,12 @@ public class IO {
                 FileReader fr = new FileReader(archivo);
                 BufferedReader br = new BufferedReader(fr);
                 String nombre = br.readLine();
-                Proovedor proovedor = new Proovedor(nombreArchivo, nombre);
+                String act = br.readLine();
+                boolean activo = false;
+                if (act.equals(true)) {
+                    activo = true;
+                }
+                Proovedor proovedor = new Proovedor(nombreArchivo, nombre, activo);
                 lista.add(proovedor);
             }
             return lista;
@@ -230,7 +280,12 @@ public class IO {
                 FileReader fr = new FileReader(archivo);
                 BufferedReader br = new BufferedReader(fr);
                 String nombre = br.readLine();
-                Tag tag = new Tag(nombreArchivo, nombre);
+                boolean activo = false;
+                String act = br.readLine();
+                if (act.equals(true)) {
+                    activo = true;
+                }
+                Tag tag = new Tag(nombreArchivo, nombre, activo);
                 lista.add(tag);
             }
             return lista;
@@ -246,5 +301,52 @@ public class IO {
             }
         }
         return lista;
+    }
+    
+    public ArrayList<Reporte> lecturaReporte(){
+        ArrayList<Reporte> lista = new ArrayList();
+        File archivoPrincipal = null;
+        FileReader frPrincipal = null;
+        BufferedReader brPrincipal = null;
+        try {
+            archivoPrincipal = new File("C:/Cresent moon/reporte/Principal.txt");
+            frPrincipal = new FileReader(archivoPrincipal);
+            brPrincipal = new BufferedReader(frPrincipal);
+            int num = Integer.parseInt(brPrincipal.readLine());
+            for (int c = 0; c < num; c++) {
+                String nombreArchivo = brPrincipal.readLine();
+                File archivo = new File("C:/Cresent moon/reporte/" + nombreArchivo + ".txt");
+                FileReader fr = new FileReader(archivo);
+                BufferedReader br = new BufferedReader(fr);
+                String id=br.readLine();
+                int tipo=Integer.parseInt(br.readLine());
+                String fecha=br.readLine();
+                String isLinea = br.readLine();
+                ArrayList<String> idtag = new ArrayList();
+                if (isLinea.equals("1")) {
+                    String[] tag = br.readLine().split(",");
+                    idtag.addAll(Arrays.asList(tag));
+                }
+                String IDproducro = br.readLine();
+                String IDproveedor=br.readLine();
+                int cantidad =Integer.parseInt(br.readLine());
+                double costo =Double.parseDouble(br.readLine());
+                Date date=new Date(fecha);               
+                Reporte reporte=new Reporte(id, tipo, date, IDproducro, IDproveedor, idtag, cantidad, costo);
+            }
+            return lista;
+        } catch (IOException ex) {
+            Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (null != frPrincipal) {
+                    frPrincipal.close();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return lista;
+        
     }
 }
