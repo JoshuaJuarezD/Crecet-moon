@@ -1,9 +1,5 @@
 package Funciones;
-import Class.Producto;
-import Class.Proovedor;
-import Class.Tag;
 import GUI.PaginaPrincipal;
-import java.util.ArrayList;
 
 
 public class Main {

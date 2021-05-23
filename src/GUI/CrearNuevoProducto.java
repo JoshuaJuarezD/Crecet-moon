@@ -18,7 +18,7 @@ public class CrearNuevoProducto extends javax.swing.JFrame {
         initComponents();
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 800, 540);
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 800, 510);
     }
     
     @SuppressWarnings("unchecked")
@@ -27,6 +27,7 @@ public class CrearNuevoProducto extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        BotonSalir = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
@@ -51,6 +52,7 @@ public class CrearNuevoProducto extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -66,6 +68,18 @@ public class CrearNuevoProducto extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel2.setText("Codigo de barras");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 184, 39));
+
+        BotonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        BotonSalir.setFont(new java.awt.Font("Tw Cen MT", 0, 36)); // NOI18N
+        BotonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        BotonSalir.setText("Salir");
+        BotonSalir.setBorder(null);
+        BotonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 100, 40));
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -196,6 +210,11 @@ public class CrearNuevoProducto extends javax.swing.JFrame {
         jButton8.setText("Eliminar Producto");
         jButton8.setBorder(null);
         jButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 170, 30));
 
         jButton9.setBackground(new java.awt.Color(0, 0, 0));
@@ -291,8 +310,21 @@ public class CrearNuevoProducto extends javax.swing.JFrame {
         this.setVisible(false); 
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        EliminarProducto v=new EliminarProducto();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
+        int resp=JOptionPane.showConfirmDialog(new JFrame(), "¿Segruo que desa salir?", "Confirmacion",JOptionPane.OK_CANCEL_OPTION);
+        if(resp == JOptionPane.OK_OPTION)
+        System.exit(0);
+    }//GEN-LAST:event_BotonSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonSalir;
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;

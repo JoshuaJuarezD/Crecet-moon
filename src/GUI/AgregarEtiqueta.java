@@ -13,7 +13,7 @@ public class AgregarEtiqueta extends javax.swing.JFrame {
         initComponents();
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 260);
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 240);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +29,7 @@ public class AgregarEtiqueta extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 30)); // NOI18N
@@ -89,7 +90,7 @@ public class AgregarEtiqueta extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(new JFrame(), "Nombre campo vacio", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             String etiquetas[] = nombre.split(",");
-            int A = JOptionPane.showConfirmDialog(new JFrame(), "seguro que desa agregar estas etiquetas?");
+            int A = JOptionPane.showConfirmDialog(new JFrame(), "¿seguro que desa agregar estas etiquetas?");
             if (A == JOptionPane.YES_OPTION) {
                 for (int d = 0; d < etiquetas.length; d++) {
                     etiquetas[d] = etiquetas[d].trim();
@@ -104,10 +105,10 @@ public class AgregarEtiqueta extends javax.swing.JFrame {
                         Tag nuevoTag = new Tag("TG0" + TagExistentes.size(), etiquetas[d], true);
                         TagExistentes.add(nuevoTag);
                         io.escrituraTags(TagExistentes);
-                        JOptionPane.showMessageDialog(new JFrame(), "Etiqeutas agregadas correctamente");
-                        jTextField1.setText("");
                     }
                 }
+                JOptionPane.showMessageDialog(new JFrame(), "Etiqeutas agregadas correctamente");
+                jTextField1.setText("");
             }
         }
     }//GEN-LAST:event_jButton1ActionPerformed

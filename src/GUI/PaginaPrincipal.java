@@ -7,6 +7,8 @@ import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 public class PaginaPrincipal extends javax.swing.JFrame {
@@ -19,7 +21,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         initComponents();
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 800, 540);
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 800, 510);
         ImageIcon imgIcon = (ImageIcon) jLabel1.getIcon();
         Image imgEscalada = imgIcon.getImage().getScaledInstance(jLabel1.getWidth(), jLabel1.getHeight(), Image.SCALE_SMOOTH);
         Icon iconoEscalado = new ImageIcon(imgEscalada);
@@ -38,6 +40,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        BotonSalir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -46,6 +49,7 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton3.setBackground(new java.awt.Color(0, 0, 0));
@@ -81,6 +85,11 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         jButton5.setText("Salida de Producto");
         jButton5.setBorder(null);
         jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 170, 30));
 
         jButton6.setBackground(new java.awt.Color(0, 0, 0));
@@ -148,6 +157,18 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         });
         getContentPane().add(jButton10, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 170, 30));
 
+        BotonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        BotonSalir.setFont(new java.awt.Font("Tw Cen MT", 0, 36)); // NOI18N
+        BotonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        BotonSalir.setText("Salir");
+        BotonSalir.setBorder(null);
+        BotonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 100, 40));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Free_Sample_By_Wix.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 300, 300));
@@ -159,13 +180,13 @@ public class PaginaPrincipal extends javax.swing.JFrame {
 
         jLabel8.setBackground(new java.awt.Color(0, 0, 0));
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo menu.png"))); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 510));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 210, 510));
 
         Fondo.setBackground(new java.awt.Color(255, 204, 153));
         Fondo.setForeground(new java.awt.Color(0, 255, 255));
         Fondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo menu.png"))); // NOI18N
         Fondo.setToolTipText("");
-        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 600, 510));
+        getContentPane().add(Fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 0, 590, 510));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -210,8 +231,21 @@ public class PaginaPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        SalidaProducto v=new SalidaProducto();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
+        int resp=JOptionPane.showConfirmDialog(new JFrame(), "¿Segruo que desa salir?", "Confirmacion",JOptionPane.OK_CANCEL_OPTION);
+        if(resp == JOptionPane.OK_OPTION)
+            System.exit(0);
+    }//GEN-LAST:event_BotonSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonSalir;
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton3;

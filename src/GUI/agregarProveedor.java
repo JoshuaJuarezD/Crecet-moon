@@ -13,7 +13,7 @@ public class agregarProveedor extends javax.swing.JFrame {
         initComponents();
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 260);
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 500, 240);
     }
 
     @SuppressWarnings("unchecked")
@@ -28,6 +28,7 @@ public class agregarProveedor extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 30)); // NOI18N
@@ -87,20 +88,20 @@ public class agregarProveedor extends javax.swing.JFrame {
             for (int c = 0; c < provedorexistente.size(); c++) {
                 if (nombre.toLowerCase().equals(provedorexistente.get(c).getNombre().toLowerCase())) {
                     if (provedorexistente.get(c).isActive()) {
-                        JOptionPane.showMessageDialog(new JFrame(), "proovedor existente en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(new JFrame(), "proveedor existente en el sistema", "Error", JOptionPane.ERROR_MESSAGE);
                     } else {
-                        int A = JOptionPane.showConfirmDialog(new JFrame(), "seguro que desa agregar al proovedor \"" + nombre + "\"?");
+                        int A = JOptionPane.showConfirmDialog(new JFrame(), "seguro que desea agregar al proveedor \"" + nombre + "\"?");
                         if (A == JOptionPane.YES_OPTION) {
                             provedorexistente.get(c).setActive(true);
                             io.escrituraProovedor(provedorexistente);
-                            JOptionPane.showMessageDialog(new JFrame(), "Proovedor agregado correctamente");
+                            JOptionPane.showMessageDialog(new JFrame(), "Proveedor agregado correctamente");
                             jTextField1.setText("");
                         }
                     }
                     return;
                 }
             }
-            int A = JOptionPane.showConfirmDialog(new JFrame(), "seguro que desa agregar al proovedor \"" + nombre + "\"?");
+            int A = JOptionPane.showConfirmDialog(new JFrame(), "seguro que desa agregar al proveedor \"" + nombre + "\"?");
             if (A == JOptionPane.YES_OPTION) {
                 Proovedor nuevoProovedor = new Proovedor(ID, nombre, true);
                 provedorexistente.add(nuevoProovedor);

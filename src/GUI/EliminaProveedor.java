@@ -17,7 +17,7 @@ public class EliminaProveedor extends javax.swing.JFrame {
         initComponents();
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 800, 540);
+        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight() / 2), 800, 510);
         refrehTable();
     }
 
@@ -37,6 +37,7 @@ public class EliminaProveedor extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton9 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        BotonSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
@@ -46,6 +47,7 @@ public class EliminaProveedor extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
@@ -108,6 +110,11 @@ public class EliminaProveedor extends javax.swing.JFrame {
         jButton5.setText("Salida de Producto");
         jButton5.setBorder(null);
         jButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 170, 30));
 
         jButton6.setBackground(new java.awt.Color(0, 0, 0));
@@ -142,6 +149,11 @@ public class EliminaProveedor extends javax.swing.JFrame {
         jButton8.setText("Eliminar Producto");
         jButton8.setBorder(null);
         jButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 170, 30));
 
         jTextField1.setBackground(new java.awt.Color(204, 204, 204));
@@ -171,6 +183,18 @@ public class EliminaProveedor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, 90, 30));
+
+        BotonSalir.setBackground(new java.awt.Color(0, 0, 0));
+        BotonSalir.setFont(new java.awt.Font("Tw Cen MT", 0, 36)); // NOI18N
+        BotonSalir.setForeground(new java.awt.Color(255, 255, 255));
+        BotonSalir.setText("Salir");
+        BotonSalir.setBorder(null);
+        BotonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(BotonSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 100, 40));
 
         jTable1.setBackground(new java.awt.Color(204, 204, 204));
         jTable1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -222,7 +246,7 @@ public class EliminaProveedor extends javax.swing.JFrame {
         }
         io.escrituraProovedor(proveedor);
         refrehTable();
-        JOptionPane.showMessageDialog(new JFrame(), "Etiqueta eliminada carrectamente", "Etiqueta eliminada", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(new JFrame(), "Proveedor eliminado carrectamente", "Proveedor Eliminado", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -261,11 +285,32 @@ public class EliminaProveedor extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        EliminarEtiqueta v=new EliminarEtiqueta();
+        v.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        SalidaProducto v=new SalidaProducto();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        EliminarProducto v=new EliminarProducto();
+        v.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void BotonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonSalirActionPerformed
+        int resp=JOptionPane.showConfirmDialog(new JFrame(), "¿Segruo que desa salir?", "Confirmacion",JOptionPane.OK_CANCEL_OPTION);
+        if(resp == JOptionPane.OK_OPTION)
+        System.exit(0);
+    }//GEN-LAST:event_BotonSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonSalir;
     private javax.swing.JLabel Fondo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -293,7 +338,7 @@ public class EliminaProveedor extends javax.swing.JFrame {
             if (proveedor.get(c).isActive()) {
                 model.addRow(new Object[]{proveedor.get(c).getID(), proveedor.get(c).getNombre()});
             }
-        }
+        } 
         jTable1.setModel(model);
     }
 

@@ -243,7 +243,7 @@ public class IO {
                 String nombre = br.readLine();
                 String act = br.readLine();
                 boolean activo = false;
-                if (act.equals(true)) {
+                if (act.equals("true")) {
                     activo = true;
                 }
                 Proovedor proovedor = new Proovedor(nombreArchivo, nombre, activo);
@@ -282,7 +282,7 @@ public class IO {
                 String nombre = br.readLine();
                 boolean activo = false;
                 String act = br.readLine();
-                if (act.equals(true)) {
+                if (act.equals("true")) {
                     activo = true;
                 }
                 Tag tag = new Tag(nombreArchivo, nombre, activo);
@@ -333,8 +333,10 @@ public class IO {
                 double costo =Double.parseDouble(br.readLine());
                 Date date=new Date(fecha);               
                 Reporte reporte=new Reporte(id, tipo, date, IDproducro, IDproveedor, idtag, cantidad, costo);
+                lista.add(reporte);
             }
             return lista;
+            
         } catch (IOException ex) {
             Logger.getLogger(IO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
