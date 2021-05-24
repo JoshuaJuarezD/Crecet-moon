@@ -27,6 +27,22 @@ public class Reporte {
         this.cantidad = cantidad;
     }
 
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public String getID() {
         return ID;
     }
@@ -77,7 +93,7 @@ public class Reporte {
 
     @Override
     public String toString() {
-        return ID + "\n" + Tipo + "\n" + hourdateFormat.format(date) + "\n"+ formatString(idtag)  +"\n" +  IDproducto + "\n" + IDproveedor+"\n"+cantidad+"\n"+costo;
+        return ID + "\n" + Tipo + "\n" + date + "\n"+ formatString(idtag)  +"\n" +  IDproducto + "\n" + IDproveedor+"\n"+cantidad+"\n"+costo;
     }
     
     public String formatString(ArrayList<String> cadena){

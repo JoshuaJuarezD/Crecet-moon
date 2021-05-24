@@ -331,7 +331,7 @@ public class IO {
                 String IDproveedor=br.readLine();
                 int cantidad =Integer.parseInt(br.readLine());
                 double costo =Double.parseDouble(br.readLine());
-                Date date=new Date(fecha);               
+                Date date=new Date(fecha);     
                 Reporte reporte=new Reporte(id, tipo, date, IDproducro, IDproveedor, idtag, cantidad, costo);
                 lista.add(reporte);
             }
