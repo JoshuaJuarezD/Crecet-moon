@@ -27,10 +27,10 @@ public class Reportes extends javax.swing.JFrame {
     ArrayList<Reporte> Reportesexistentes = io.lecturaReporte();
     
     public Reportes() {
+        
         initComponents();
-        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
-        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
-        this.setBounds((ancho / 2) - (this.getWidth() / 2), (alto / 2) - (this.getHeight()), 1070, 820);
+        this.setLocationRelativeTo(null);
+        this.setSize(1070, 820);
         jTable1.setModel(modelo());
         
     }
@@ -63,7 +63,6 @@ public class Reportes extends javax.swing.JFrame {
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(850, 490));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tw Cen MT", 0, 30)); // NOI18N
@@ -218,11 +217,11 @@ public class Reportes extends javax.swing.JFrame {
         String fechaA=jComboBox2.getSelectedItem().toString()+ "-" + jComboBox3.getSelectedItem().toString()+ "-" + jComboBox1.getSelectedItem().toString();
         String fechaB=jComboBox4.getSelectedItem().toString()+ "-" + jComboBox5.getSelectedItem().toString()+ "-" + jComboBox6.getSelectedItem().toString();
         List<JTable> tb = new ArrayList<JTable>();
-        File f=new File(fechaA+" - "+fechaB+".xls");
+        File f=new File("Reporte Crecet moon "+fechaA+" - "+fechaB+".xls");
         tb.add(jTable1); 
         exportExcel excelExporter = new exportExcel(tb, new File(f.getAbsolutePath())); // String con directorio
         if (excelExporter.export()) {
-            System.out.println("TABLAS EXPORTADOS CON EXITOS!");
+            JOptionPane.showMessageDialog(new JFrame(), "Tabla exportada","Operacion completada",JOptionPane.INFORMATION_MESSAGE);
         }
     }catch (Exception ex) {
         ex.printStackTrace();

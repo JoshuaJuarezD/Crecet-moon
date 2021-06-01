@@ -107,7 +107,7 @@ public class AgregarEtiqueta extends javax.swing.JFrame {
                         io.escrituraTags(TagExistentes);
                     }
                 }
-                JOptionPane.showMessageDialog(new JFrame(), "Etiqeutas agregadas correctamente");
+                JOptionPane.showMessageDialog(new JFrame(), "Etiquetas agregadas correctamente");
                 jTextField1.setText("");
             }
         }

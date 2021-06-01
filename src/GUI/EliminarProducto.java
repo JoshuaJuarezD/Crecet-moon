@@ -138,7 +138,7 @@ public class EliminarProducto extends javax.swing.JFrame {
         jButton7.setBackground(new java.awt.Color(0, 0, 0));
         jButton7.setFont(new java.awt.Font("Tw Cen MT", 0, 18)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Agregar Etoqueta");
+        jButton7.setText("Agregar Etiqueta");
         jButton7.setBorder(null);
         jButton7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton7.addActionListener(new java.awt.event.ActionListener() {

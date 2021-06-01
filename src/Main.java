@@ -1,10 +1,12 @@
-package Funciones;
+
+import Funciones.IO;
 import GUI.PaginaPrincipal;
 
 
 public class Main {
 
     public static void main(String[] args) {
+        try{
            IO io=new IO();
            io.Creardirectrorio("C:/Cresent moon/productos");
            io.Creardirectrorio("C:/Cresent moon/proovedor");
@@ -16,6 +18,9 @@ public class Main {
            io.CrearArchivo("C:/Cresent moon/reporte/Principal.txt");
            PaginaPrincipal ventana= new PaginaPrincipal();
            ventana.setVisible(true);
+        }catch(Exception e){
+            
+        }
     }
     
 }
